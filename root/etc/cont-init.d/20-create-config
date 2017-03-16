@@ -1,0 +1,16 @@
+#!/usr/bin/with-contenv bash
+
+if [ ! -f /config/aria2c.conf ]; then
+	echo "dir=/downloads" >> /config/aria2c.conf
+	echo "enable-rpc=true" >> /config/aria2c.conf
+	echo "log=-" >> /config/aria2c.conf
+	echo "rpc-listen-all=false" >> /config/aria2c.conf
+	echo "rpc-listen-port=15278" >> /config/aria2c.conf
+fi
+
+if [ -f /app/configuration.js ]; then
+	# move configuration.js to /config
+	# and symlink
+	mv /app/configuration.js /config/webui-conf.js
+	ln -sf /config/webui-conf.js /app/configuration.js
+fi
